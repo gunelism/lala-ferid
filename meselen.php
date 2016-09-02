@@ -90,12 +90,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<?php
 	}
 		?>
+		
+		</div>
+		<div class="page_links">
+			<div class="next_button">
+				 <a href="#">Next</a>
+			</div>
+			<div class="page_numbers">
+			    <ul>
+				<li><a href="#">1</a>
+				<li><a href="#">2</a>
+				<li><a href="#">3</a>
+				<li><a href="#">4</a>
+				<li><a href="#">5</a>
+				<li><a href="#">6</a>
+				<li><a href="#">... Next</a>
+				</ul>
+			</div>
+		<div class="clear"></div>
+			<div class="page_bottom">
+				<p>Back To : <a href="#">Top</a> |  <a href="#">Home</a></p>
+			</div>
 
-		<!-- </div>
-	 -->
- 
-		<!-- </div> -->
-	<div class="sidebar">
+		</div>
+
+		</div>
+	<!-- <div class="sidebar">
 		<div class="side_top">
 		    <h2>Recent Feeds</h2>
 			<div class="list1">
@@ -123,10 +143,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 	</div>
 	
-	</div>
+	</div> -->
 	<div class="clear"></div>
 	</div>
-
 </div>
 <div class="footer">
 	<div class="wrap">

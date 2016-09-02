@@ -10,7 +10,7 @@ else{
  ?>
 
 <!DOCTYPE html>
-<html>v 
+<html> 
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -43,9 +43,13 @@ else{
       display: none;
     }
     img{
-      width:150px;
-      height: 50px;
+
+      width:100%;
+      height: 200px;
     }
+    td:nth-child(3), td:nth-child(5), td:nth-child(6){
+      width: 10px;
+    } 
     </style>
   </head>
   <body>
@@ -61,6 +65,7 @@ else{
            <td><b>TEXT</b></td>
              <td><b>CREATE_DATE</b></td>
               <td><b>Image</b></td>
+              <td><b>View</b></td>
               <td><b>Action</b></td>
       </tr>
     </thead>
@@ -68,14 +73,17 @@ else{
       <?php
       include 'config.php';
       $newquery = $connect -> select("crudoop2");
+      $target_dir = "../images/";
        while ($row = mysqli_fetch_assoc($newquery)){
+        // echo  $target_dir . $row['src'] ;
      ?>
            <tr>
 
            <td><?=$row['id']?></td>
            <td><?=$row['text']?></td>
            <td><?=$row['date']?></td>
-            <td> <img src="<?= $row['src'] ?>"> </td>
+            <td> <img src="<?= $target_dir . $row['src'] ?>"> </td>
+           <td><?=$row['view']?></td>
             
     
         <td>

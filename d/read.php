@@ -22,7 +22,14 @@
     }
     .col-md-5 {
       margin:5px;
-      border:1px solid black;
+    }
+    img{
+      width: 150px;
+      height: 150px;
+    }
+    .text{
+      overflow: scroll;
+      height: 250px;
     }
 
     </style>
@@ -31,17 +38,10 @@
     <div class="container">
         <h1>PHP CRUD Grid</h1>
     <a href="show.php" class="btn btn-default">Back</a>
-    <form  action="search.php" method="post">
-      <input type="search" name="search" placeholder="search">
-    </form>
         <div class="row">
 
       <?php
       include 'config.php';
-      // $a=new Database("localhost","root","","xeber");
-      //  $lala=$a->select('xeber');
-      // if ($lala) {
-      //    while($row=mysqli_fetch_assoc($lala)){  
       $newquer = $connect -> select("crudoop2");
   while ($row = mysqli_fetch_assoc($newquer)) {   
     
@@ -51,10 +51,18 @@
   
       ?>
 
-           <?php foreach ($row as $key => $value) {  ?>
-           <div class="col-md-5"><?=$row['title']?></div>
-            <div class="col-md-5"><?=$row['text']?></div>
-      <?php   } 
+           <?php
+            $target = "../images";
+            // foreach ($row as $key => $value) {  
+            ?>
+           <div class="col-md-5">
+           <img src ="../images/<?=$row['src']?>">
+           </div>
+            <div class="col-md-5 text">
+              <?=$row['text']?>
+            </div>
+      <?php   
+    // } 
 
 
        }

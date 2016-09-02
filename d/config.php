@@ -15,7 +15,7 @@ class Database
 
      $this->conn=mysqli_connect($this->host,$this->username,$this->pass,$this->dbName);
            if ($this->conn) {
-             echo "yes";
+             // echo "yes";
            }
            else {
              echo "no";
@@ -25,14 +25,30 @@ class Database
       public  function select ($tname, $where = null){
           $sql="SELECT * FROM $tname";
           if ($where != null) {
-        				$sql .= ' WHERE '.$where;
-        			}
+                $sql .= ' WHERE '.$where;
+              } 
+          
           $query=mysqli_query($this->conn,$sql);
           return $query;
         }
 
+        public function select2($tname, $view =null, $time = null )
+        {
+           $sql = " SELECT * FROM $tname ";
+          if ($time !=null){
+            $sql2 .= " ORDER BY $time DESC";
+           $query2=mysqli_query($this->conn,$sql2);
+            return $query2;
+          }
+          if ($view != null){
+           $sql .= " ORDER BY $view DESC";
+           $query=mysqli_query($this->conn,$sql);
+            return $query;
+          }
+        }
+
         public function insert($tname,$text,$src){
-          $sql="INSERT INTO $tname(`text`,`src`) VALUES ('$text' , '$src')";
+          $sql="INSERT INTO $tname(`text`, `src`) VALUES ('$text', '$src')";
           $query=mysqli_query($this->conn,$sql);
           return $query;
         }
@@ -41,13 +57,23 @@ class Database
           $query=mysqli_query($this->conn,$sql);
           return $query;
         }
-        public function update($tname,$text,$src, $id=null){
+        public function update($tname,$text,$src1,$view=null, $id=null){
 
-            $sql="UPDATE $tname SET `text`='$text', `src`='$src' WHERE id=$id";
-
-
+            $sql="UPDATE $tname SET `text`='$text', `src`='$src1', `view`=$view WHERE id=$id";
           $query=mysqli_query($this->conn,$sql);
           return $query;
+        }
+        public function view($tname,$view,$id){
+
+            $sql="UPDATE $tname SET `view`=$view  WHERE id=$id";
+          $query=mysqli_query($this->conn,$sql);
+          return $query;
+            if ($query) {
+              
+            }else {
+                
+                echo "error";
+                        }
         }
       }
 

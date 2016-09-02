@@ -11,7 +11,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="d/bootstrap.css">
 </head>
 <body>
 <div class="header">
@@ -22,8 +21,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 			<div class="login_button">
 			    <ul>
-			    <li><a href="#">Sign in</a><li>  
-			    <li><a href="d/index.php">Login</a></li>
+			    <li><a href="#">Sign in</a><li> | 
+			    <li><a href="#">Login</a></li>
 			    </ul>
 			</div>
 			<div class="clear"></div>
@@ -45,8 +44,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			    </ul>
 			</div>
 			<div class="search_box">
-			    <form>
-			    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+			    <form action="search.php" method="post">
+			    <input type="text" name="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" name="submit" value="">
 			    </form>
 			</div>
 			<div class="clear"></div>
@@ -55,57 +54,85 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <div class="wrap">
 	<div class="main">
-		<div class="container">
-		<?php 
-		include 'd/config.php';
+		<div class="content">
+
+			<?php 
+				include 'd/config.php';
 		$newquer = $connect -> select("crudoop2");
 		$target = "images/";
 		while ($row = mysqli_fetch_assoc($newquer)) {
-			// echo $row['src'];
-		
-		 ?>
-
+			 ?>
 			<div class="box1">
 
-				<div class="box1_img">
-				    <img src="<?= $target .  $row['src']?>">
-				</div>   
-				<div class="data">
-
-				<?php 
+			<!--     <h2><a href="single.html">Making it look like readable English. Many desktop publishing packages and web page</a></h2>
+			    <span>By Kieth Deviec- 2 hours ago</span> -->
+			    <?php 
 					$arr=[];
 					$arr[] = explode('.', $row['text']);
 				?>
-					<h2><a href="#" ><?php foreach ($arr as $key => $value) {
+					<h2><a href="single.php?id=<?=$row['id'] ?>" ><?php foreach ($arr as $key => $value) {
 						echo  substr($value[0], 0,50);		
 					} 
 						?> </a></h2>
-				    <p><?= substr($row['text'],0,200) ?></p>
+				<div class="box1_img">
+				   
+				    <img src="<?= $target .  $row['src']?>">
+				</div>   
+				<div class="data">
+				  
+				  
+				    <p><?= substr($row['text'],0,400) ?></p>
+
 				    <a href="single.php?id=<?=$row['id'] ?>">Continue reading >>></a>
 				</div>
 			<div class="clear"></div>
 			</div>
-
-
-		<?php
-	}
-		?>
-
-		<!-- </div>
-	 -->
- 
-		<!-- </div> -->
+			
+			<?php 
+		}
+			?>
+		
+		<div class="page_links">
+			<div class="next_button">
+				 <a href="#">Next</a>
+			</div>
+			<div class="page_numbers">
+			    <ul>
+				<li><a href="#">1</a>
+				<li><a href="#">2</a>
+				<li><a href="#">3</a>
+				<li><a href="#">4</a>
+				<li><a href="#">5</a>
+				<li><a href="#">6</a>
+				<li><a href="#">... Next</a>
+				</ul>
+			</div>
+		<div class="clear"></div>
+			<div class="page_bottom">
+				<p>Back To : <a href="#">Top</a> |  <a href="#">Home</a></p>
+			</div>
+		</div>
+		</div>
 	<div class="sidebar">
 		<div class="side_top">
 		    <h2>Recent Feeds</h2>
 			<div class="list1">
 				 <ul>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-					<li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
+					<?php 
+		    $newquer3 = $connect -> select2("crudoop2", "date");
+		    while ($row3 = mysqli_fetch_assoc($newquer3)) {
+		    	
+		    
+		    ?>
+			  <li><a href="#"> 
+			  <?php 
+				echo substr( $row3['text'],0,43);
+			   ?>
+			  </a></li>
+			  <?php
+			}
+		     ?>
+					
 				</ul>
 			</div>
 		</div>
@@ -113,20 +140,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	    <h2>Most Viewed</h2>
 		<div class="list2">
 		    <ul>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			  <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
+		    <?php 
+		    $newquer2 = $connect -> select2("crudoop2", "view");
+		    while ($row2 = mysqli_fetch_assoc($newquer2)) {
+		    	
+		    
+		    ?>
+			  <li><a href="#"> 
+			  <?php 
+				echo substr( $row2['text'],0,43);
+			   ?>
+			  </a></li>
+			  <?php
+			}
+		     ?>
+			 
 			</ul>
 		</div>
 	</div>
-	
 	</div>
 	<div class="clear"></div>
 	</div>
-
 </div>
 <div class="footer">
 	<div class="wrap">
@@ -172,7 +206,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <style type="text/css">
 	.box1_img img{
-		width: 200px;
-		height: 200px;
+		width: 250px;
+		height: 150px;
 	}
 </style>

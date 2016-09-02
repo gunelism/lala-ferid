@@ -33,7 +33,7 @@
 <section class="container">
 	<div class="row text-center">
 		<div class="col-md-4 col-md-offset-4">
-		<img class="img-circle" src="images/1.png">
+		<img class="img-circle" src="../images/1.png">
 			 <h3 class="title">Admin Login</h3>
 			 <p>Sign in to your account</p>
 			 <br>

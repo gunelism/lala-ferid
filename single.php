@@ -4,6 +4,11 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<?php 
+include 'd/config.php';
+
+
+ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -55,21 +60,51 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="wrap">
 	<div class="main">
 		<div class="content">
-			<div class="box1">
-			   <h2><a href="single.html">Making it look like readable English. Many desktop publishing packages and web page</a></h2>
-			   <span>By Kieth Deviec - 2 hours ago</span>
-			   <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editorsLorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+		<div class="box1">
+
+		<?php 
+		$id = $_GET['id'];
+
+		$newquer = $connect -> select('crudoop2', "id = $id");
+		$target = "images/";
+
+		while($row=mysqli_fetch_assoc($newquer)) {
+		 
+			$view=$row['view']+1;
+			// echo $view;
+			$newquer1 = $connect -> view('crudoop2',$view, $id);
+
+
+
+					$arr=[];
+					$arr[] = explode('.', $row['text']);
+				?>
+					<h2><a href="#" ><?php 
+					foreach ($arr as $key => $value) {
+						echo  substr($value[0], 0,50);		
+					} 
+						?>
+						 </a></h2>
+
+			<?php echo "<p>" . substr( $row['text'],0,300)." </p><br>";
+			?>
+					
 				<div class="top_img">
-				   <img src="images/img2_630X330.jpg" alt="" />
+				   <img src="<?= $target .  $row['src']?>">
 				</div>   
 				<div class="data_desc">
-				    <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editorsLorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors</p>
-				    <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editorsLorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors</p>
-				    <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editorsLorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors</p>
-				    <a href="#">Continue reading >>></a>
+				    
+				   
 				</div>
-			</div> 
+			
+			<?php 
+			echo "<p>" . substr( $row['text'],300) . "</p><br>";
+			} ?>
+			 <!-- <a href="#">Continue reading >>></a> -->
+			 </div> 
 		</div> 
+		
+
 	<div class="sidebar">
 		<div class="side_top">
 			<h2>Recent Feeds</h2>
@@ -88,12 +123,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<h2>Most Viewed</h2>
 		<div class="list2">
 		   <ul>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
+			<?php 
+		    $newquer2 = $connect -> select2("crudoop2", "view");
+		    while ($row2 = mysqli_fetch_assoc($newquer2)) {
+		    	
+		    
+		    ?>
+			  <li><a href="#"> 
+			  <?php 
+				echo substr( $row2['text'],0,43);
+			   ?>
+			  </a></li>
+			  <?php
+			}
+		     ?>
 		   </ul>
 		</div>
 	</div>

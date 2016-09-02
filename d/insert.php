@@ -27,10 +27,10 @@ include 'config.php';
 
 if (isset($_POST['name'])) { 
   $target_dir = "../images/";
-  $target_file =$target_dir.date('dmYgis') . basename($_FILES['img']['name']);
+  $target_file = date('dmYgis') . basename($_FILES['img']['name']);
   $target_type = pathinfo($target_file , PATHINFO_EXTENSION);
-  move_uploaded_file($_FILES['img']['tmp_name'], "../images/" . $target_file);
- echo $target_file;
+  move_uploaded_file($_FILES['img']['tmp_name'], $target_dir . $target_file);
+ // echo $target_file;
   if ($connect->insert("crudoop2", $_POST['word'], $target_file )) {
     header('Location:show.php');
   }else{
