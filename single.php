@@ -110,12 +110,20 @@ include 'd/config.php';
 			<h2>Recent Feeds</h2>
 			<div class="list1">
 			   <ul>
-				 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-				 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-				 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-				 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-				 <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
-			     <li><a href="#">Lorem ipsum dolor desktop publishing</a></li>
+				<?php 
+		    $newquer3 = $connect -> select2("crudoop2", "date");
+		    while ($row3 = mysqli_fetch_assoc($newquer3)) {
+		    	
+		    
+		    ?>
+			  <li><a href="#"> 
+			  <?php 
+				echo substr( $row3['text'],0,43);
+			   ?>
+			  </a></li>
+			  <?php
+			}
+		     ?>
 			   </ul>
 			</div>
 		</div>

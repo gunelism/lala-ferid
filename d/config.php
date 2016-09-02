@@ -36,12 +36,12 @@ class Database
         {
            $sql = " SELECT * FROM $tname ";
           if ($time !=null){
-            $sql2 .= " ORDER BY $time DESC";
+            $sql2 .= " ORDER BY $time DESC LIMIT 5";
            $query2=mysqli_query($this->conn,$sql2);
             return $query2;
           }
           if ($view != null){
-           $sql .= " ORDER BY $view DESC";
+           $sql .= " ORDER BY $view DESC LIMIT 5";
            $query=mysqli_query($this->conn,$sql);
             return $query;
           }
